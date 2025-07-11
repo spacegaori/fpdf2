@@ -614,6 +614,13 @@ def pack_codes_into_bytes(codes):
     bits_in_buffer = 0
     output = bytearray()
 
+    try:
+        import numpy as np
+    except ImportError:
+        pass
+    else:
+        # Replace with a numpy array
+        codes = np.array(codes, dtype=np.uint32)
     for code in codes:
         buffer = (buffer << bits_per_code) | code
         bits_in_buffer += bits_per_code
